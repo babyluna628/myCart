@@ -1,6 +1,6 @@
 import React from "react";
 import HeroSection from "./HeroSection";
-import iphone from "../../assets/iphone.jpg";
+import iphone from "../../assets/iphone-14-pro.webp";
 import mac from "../../assets/mac-system-cut.jfif";
 import FeaturedProducts from "./FeaturedProducts";
 
@@ -13,9 +13,7 @@ const HomePage = () => {
         link="/"
         image={iphone}
       />
-
       <FeaturedProducts />
-
       <HeroSection
         title="궁극의 장비를 세팅하세요"
         subtitle="You can add Studio Display and colour-matched Magic accessories to your bag after configure your Mac mini."

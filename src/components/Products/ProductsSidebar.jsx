@@ -1,6 +1,6 @@
+import LinkWithIcon from "../Navbar/LinkWithIcon";
 import "./ProductsSidebar.css";
 import rocket from "../../assets/rocket.png";
-import LinkWithIcon from "../Navbar/LinkWithIcon";
 
 const ProductsSidebar = () => {
   return (

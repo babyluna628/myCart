@@ -1,6 +1,6 @@
 import ProductsList from "./ProductsList";
-import ProductsSidebar from "./ProductsSidebar";
 import "./ProductsPage.css";
+import ProductsSidebar from "./ProductsSidebar";
 
 const ProductsPage = () => {
   return (

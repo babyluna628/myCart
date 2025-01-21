@@ -1,16 +1,24 @@
 import "./App.css";
+import LoginPage from "./components/Authentication/LoginPage";
+import CartPage from "./components/Cart/CartPage";
 import HomePage from "./components/Home/HomePage";
+import MyOrderPage from "./components/MyOrder/MyOrderPage";
 import Navbar from "./components/Navbar/Navbar";
-import ProductsPage from "./components/Products/ProductsPage";
+import ProductsPage from "./components/products/ProductsPage";
 import SingleProductPage from "./components/SingleProduct/SingleProductPage";
 
 function App() {
   return (
     <div className="app">
       <Navbar />
-      {/* <HomePage /> */}
-      {/* <ProductsPage /> */}
-      <SingleProductPage />
+      <main>
+        {/* <HomePage /> */}
+        {/* <ProductsPage /> */}
+        {/* <SingleProductPage /> */}
+        {/* <CartPage /> */}
+        {/* <MyOrderPage /> */}
+        <LoginPage />
+      </main>
     </div>
   );
 }
