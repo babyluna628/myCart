@@ -6,6 +6,7 @@ import { jwtDecode } from "jwt-decode";
 import setAuthToken from "./utils/setAuthToken";
 import { addToCartAPI } from "./services/cartServices";
 import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 //만약 토큰이 있으면 axios 설정에 추가됨
 setAuthToken(localStorage.getItem("token"));
@@ -28,10 +29,10 @@ function App() {
 
     addToCartAPI(product._id, quantity)
       .then((res) => {
-        console.log(res.data);
+        toast.success("상품추가성공");
       })
       .catch((err) => {
-        console.log(err.response);
+        toast.error("상품추가실패");
       });
   };
 
@@ -52,6 +53,11 @@ function App() {
     <div className="app">
       <Navbar user={user} cartCount={cart.length} />
       <main>
+        <ToastContainer
+          position="bottom=right"
+          autoClose={3000}
+          closeOnClick={true}
+        />
         <Routing addToCart={addToCart} />
       </main>
     </div>
