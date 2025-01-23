@@ -1,18 +1,9 @@
+import useData from "../../Hook/useData";
 import LinkWithIcon from "../Navbar/LinkWithIcon";
 import "./ProductsSidebar.css";
-import { useEffect } from "react";
-import apiClient from "../../utils/api-client";
-import useData from "../../Hook/useData";
 
 const ProductsSidebar = () => {
   const { data: categories, error } = useData("category");
-
-  useEffect(() => {
-    apiClient
-      .get("/category")
-      //.then((res) => setCategories(res.data))
-      .catch((err) => setError(err.message));
-  }, []);
 
   return (
     <aside className="products_sidebar">
@@ -21,12 +12,12 @@ const ProductsSidebar = () => {
       <div className="category_links">
         {error && <em className="form_error">{error}</em>}
         {categories &&
-          categories.map((category) => (
+          categories.map((c) => (
             <LinkWithIcon
-              key={category._id}
-              title={category.name}
-              link={`/products?category=${category.name}`}
-              emoji={`http://localhost:5000/category/${category.image}`}
+              key={c._id}
+              title={c.name}
+              link={`/products?category=${c.name}`}
+              emoji={`http://localhost:5000/category/${c.image}`}
               sidebar={true}
             />
           ))}

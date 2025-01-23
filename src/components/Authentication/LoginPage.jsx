@@ -1,19 +1,8 @@
-import { useRef, useState } from "react";
 import "./LoginPage.css";
 import { useForm } from "react-hook-form";
 
 const LoginPage = () => {
-  //const passwordRef = useRef(null);
-  // const [user, setUser] = useState({
-  //   email: "",
-  //   password: "",
-  // });
-
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-  //   console.log(user);
-  //   setUser({ email: "", password: "" }); //초기값
-  // };
+  // const passwordRef = useRef(null);
   const {
     register,
     handleSubmit,
@@ -33,10 +22,10 @@ const LoginPage = () => {
             <label htmlFor="email">Email</label>
             <input
               {...register("email", {
-                required: "이메일을 이력해주세요.",
+                required: "이메일을 입력해주세요.",
                 pattern: {
                   value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                  message: "이메일 형식에 맞게 작성",
+                  message: "이메일 형식에 맞춰주세요.",
                 },
               })}
               id="email"
@@ -54,6 +43,7 @@ const LoginPage = () => {
                 required: "패스워드를 입력해주세요.",
                 minLength: { value: 4, message: "패스워드는 최소 4자 이상." },
               })}
+              // ref={passwordRef}
               id="password"
               className="form_text_input"
               placeholder="패스워드"
@@ -61,6 +51,18 @@ const LoginPage = () => {
             {errors.password && (
               <em className="form_error">{errors.password.message}</em>
             )}
+            {/* <button
+              type="button"
+              onClick={() => (passwordRef.current.type = "password")}
+            >
+              비밀번호 숨기기
+            </button>
+            <button
+              type="button"
+              onClick={() => (passwordRef.current.type = "text")}
+            >
+              비밀번호 보이게
+            </button> */}
           </div>
 
           <button type="submit" className="search_button form_submit">

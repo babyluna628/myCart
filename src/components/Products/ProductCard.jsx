@@ -1,5 +1,4 @@
 import "./ProductCard.css";
-
 import star from "../../assets/white-star.png";
 import basket from "../../assets/basket.png";
 import { NavLink } from "react-router-dom";
@@ -16,7 +15,7 @@ const ProductCard = ({
   return (
     <article className="product_card">
       <div className="product_image">
-        <NavLink to={`product/${id}`}>
+        <NavLink to={`/product/${id}`}>
           <img
             src={`http://localhost:5000/products/${image}`}
             alt="product image"
@@ -25,7 +24,7 @@ const ProductCard = ({
       </div>
 
       <div className="product_details">
-        <h3 className="product_price">{price?.toLocaleString("ko-KR")}원</h3>
+        <h3 className="product_price">{price?.toLocaleString("ko-KR")} 원</h3>
         <p className="product_title">{title}</p>
 
         <footer className="align_center product_info_footer">
@@ -35,6 +34,8 @@ const ProductCard = ({
             </p>
             <p className="product_review_count">{ratingCounts}</p>
           </div>
+
+          {/* 제품의 재고수가 1개 이상일때만 장바구니 가능 */}
           {stock > 0 && (
             <button className="add_to_cart">
               <img src={basket} alt="basket button" />
