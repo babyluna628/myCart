@@ -1,6 +1,6 @@
 import apiClient from "./api-client";
 
-const setAuthToken = () => {
+const setAuthToken = (token) => {
   if (token) {
     apiClient.defaults.headers.common["x-auth-token"] = token;
   } else {
