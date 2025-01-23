@@ -8,7 +8,7 @@ import lock from "../../assets/locked.png";
 import LinkWithIcon from "./LinkWithIcon";
 import { NavLink } from "react-router-dom";
 
-const Navbar = (user) => {
+const Navbar = ({ user }) => {
   return (
     <nav className="align_center navbar">
       <div className="align_center">
