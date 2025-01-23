@@ -2,7 +2,7 @@ import "./SignupPage.css";
 import user from "../../assets/user.webp";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
-import { signup } from "../../services/userServices";
+import { login, signup } from "../../services/userServices";
 
 const SignupPage = () => {
   const [profilePic, setProfilePic] = useState(null);
@@ -11,17 +11,16 @@ const SignupPage = () => {
   const {
     register,
     handleSubmit,
-    reset,
     watch,
     formState: { errors },
   } = useForm();
   const submitData = async (formData) => {
     try {
       await signup(formData, profilePic);
+      window.location = "/"; //회원 가입후 바로 홈페이지로(로그인처럼)
     } catch (error) {
       setFormError(error.response.data.message);
     }
-    reset();
   };
   return (
     <section className="align_center form_page">
