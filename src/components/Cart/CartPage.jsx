@@ -1,14 +1,17 @@
 import "./CartPage.css";
 import remove from "../../assets/remove.png";
-import user from "../../assets/user.webp";
 import QuantityInput from "../SingleProduct/QuantityInput";
 import Table from "../Common/Table";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { useEffect } from "react";
+import UserContext from "../../contexts/UserContext";
+import CartContext from "../../contexts/CartContext";
 
-const CartPage = ({ cart }) => {
+const CartPage = () => {
   //console.log(cart);
   const [subTotal, setSubTotal] = useState(0);
+  const { cart, addToCart, removeFromCart } = useContext(CartContext);
+  const user = useContext(UserContext); //useContext로 UserContext 가져오기
   useEffect(() => {
     let total = 0;
     cart.forEach((item) => {
@@ -20,10 +23,13 @@ const CartPage = ({ cart }) => {
   return (
     <section className="align_center cart_page">
       <div className="align_center user_info">
-        <img src={user} alt="user profile" />
+        <img
+          src={`http://localhost:5000/profile/${user?.profilePic}`}
+          alt="user profile"
+        />
         <div>
-          <p className="user_name">Dooly</p>
-          <p className="user_email">dooly@naver.com</p>
+          <p className="user_name">{user?.name}</p>
+          <p className="user_email">{user?.email}</p>
         </div>
       </div>
 
@@ -42,6 +48,7 @@ const CartPage = ({ cart }) => {
                   src={remove}
                   alt="remove icon"
                   className="cart_remove_icon"
+                  onClick={() => removeFromCart(product._id)}
                 />
               </td>
             </tr>
@@ -61,7 +68,7 @@ const CartPage = ({ cart }) => {
           </tr>
           <tr className="cart_bill_final">
             <td>결재금액</td>
-            <td>{(subTotal + 3000).toLocaleString("ko-KR")} 원</td>
+            <td>{(subTotal + 5000).toLocaleString("ko-KR")} 원</td>
           </tr>
         </tbody>
       </table>

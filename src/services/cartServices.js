@@ -9,3 +9,7 @@ export function addToCartAPI(id, quantity) {
 export function getCartAPI() {
   return apiClient.get("/cart");
 }
+//백엔드에 카트아이템삭제  patch는 업데이트에 사용(삭제,수정)
+export function removeFromCartAPI(id) {
+  return apiClient.patch(`/cart/remove/${id}`);
+}
