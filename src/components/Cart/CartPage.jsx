@@ -1,18 +1,30 @@
 import "./CartPage.css";
 import remove from "../../assets/remove.png";
+import user from "../../assets/user.webp";
 import QuantityInput from "../SingleProduct/QuantityInput";
 import Table from "../Common/Table";
-import { useContext, useState } from "react";
-import { useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import UserContext from "../../contexts/UserContext";
 import CartContext from "../../contexts/CartContext";
+import { checkoutAPI } from "../../services/orderServices";
+import { toast } from "react-toastify";
 
 const CartPage = () => {
   //console.log(cart);
   const [subTotal, setSubTotal] = useState(0);
-  const { cart, addToCart, removeFromCart, updateCart } =
-    useContext(CartContext);
-  const user = useContext(UserContext); //useContext로 UserContext 가져오기
+  const user = useContext(UserContext); //useContext 로 UserContext 가져오기
+  const { cart, removeFromCart, updateCart, setCart } = useContext(CartContext);
+  const checkout = () => {
+    const oldCart = [...cart]; //복사
+    setCart([]); //장바구니 비우기
+    checkoutAPI()
+      .then(() => toast.success("주문 성공!"))
+      .catch(() => {
+        toast.error("checkout 중 에러발생.");
+        setCart(oldCart); //이전 장바구니 복구
+      });
+  };
+
   useEffect(() => {
     let total = 0;
     cart.forEach((item) => {
@@ -20,7 +32,6 @@ const CartPage = () => {
     });
     setSubTotal(total);
   }, [cart]);
-
   return (
     <section className="align_center cart_page">
       <div className="align_center user_info">
@@ -39,7 +50,7 @@ const CartPage = () => {
           {cart.map(({ product, quantity }) => (
             <tr key={product._id}>
               <td>{product.title}</td>
-              <td>{product.price.toLocaleString("ko-KR")}원</td>
+              <td>{product.price.toLocaleString("ko-KR")} 원</td>
               <td className="align_center table_quantity_input">
                 <QuantityInput
                   quantity={quantity}
@@ -52,10 +63,10 @@ const CartPage = () => {
               <td>{(quantity * product.price).toLocaleString("ko-KR")} 원</td>
               <td>
                 <img
+                  onClick={() => removeFromCart(product._id)}
                   src={remove}
                   alt="remove icon"
                   className="cart_remove_icon"
-                  onClick={() => removeFromCart(product._id)}
                 />
               </td>
             </tr>
@@ -80,7 +91,9 @@ const CartPage = () => {
         </tbody>
       </table>
 
-      <button className="search_button checkout_button">결재하기</button>
+      <button onClick={checkout} className="search_button checkout_button">
+        결재하기
+      </button>
     </section>
   );
 };

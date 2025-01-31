@@ -1,7 +1,7 @@
 import { useState } from "react";
+import { login } from "../../services/userServices";
 import "./LoginPage.css";
 import { useForm } from "react-hook-form";
-import { login } from "../../services/userServices";
 
 const LoginPage = () => {
   // const passwordRef = useRef(null);
@@ -14,9 +14,9 @@ const LoginPage = () => {
   const submitData = async (formData) => {
     try {
       await login(formData);
-      window.location = "/"; // 로그인후 홈페이지로
-    } catch (err) {
-      setFormError(err.response.data.message);
+      window.location = "/"; //로그인 후 홈페이지로
+    } catch (error) {
+      setFormError(error.response.data.message);
     }
   };
   return (
