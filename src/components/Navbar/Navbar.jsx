@@ -6,18 +6,25 @@ import memo from "../../assets/memo.png";
 import order from "../../assets/package.png";
 import lock from "../../assets/locked.png";
 import LinkWithIcon from "./LinkWithIcon";
-import { NavLink, useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { NavLink, useNavigate, useSearchParams } from "react-router-dom";
+import { useEffect, useState } from "react";
 
 const Navbar = ({ user, cartCount }) => {
   const [search, setSearch] = useState(""); //검색어
   const navigate = useNavigate(); // 이동객체
+  const [searchParams] = useSearchParams();
   const handleSubmit = (e) => {
     e.preventDefault(); //폼 서브밋 이벤트 중지
     if (search.trim() !== "") {
       navigate(`/products?search=${search.trim()}`);
+      setSearch("");
+    } else {
+      alert("검색어를 입력해주세요.");
     }
   };
+  useEffect(() => {
+    setSearch("");
+  }, [searchParams.get("search")]);
   return (
     <nav className="align_center navbar">
       <div className="align_center">
